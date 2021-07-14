@@ -14,16 +14,6 @@ export default function EventPage({ event }) {
     return (
         <Layout>
             <div className={styles.event}>
-                {/* <div className={styles.controls}>
-                    <Link href={`/events/edit/${event.id}`}>
-                        <a>
-                            <FaPencilAlt /> Edit Event
-                        </a>
-                    </Link>
-                    <a className={styles.delete} onClick={deleteEvent}>
-                        <FaTimes /> Delete Event
-                    </a>
-                </div> */}
                 <span>
                     {new Date(event.date).toLocaleDateString("en-US")} at{" "}
                     {event.time}
@@ -53,31 +43,31 @@ export default function EventPage({ event }) {
         </Layout>
     );
 }
-// export async function getServerSideProps({ query: { slug } }) {
-//     const res = await fetch(`${API_URL}/api/events/${slug}`);
-//     const event = await res.json();
-//     return {
-//         props: { event: event[0] },
-//     };
-// }
-
-export async function getStaticPaths() {
-    const res = await fetch(`${API_URL}/events`);
-    const events = await res.json();
-    const paths = events.map((event) => ({
-        params: { slug: event.slug },
-    }));
-    return {
-        paths,
-        fallback: true, //false : if notFound redirect to 404page
-    };
-}
-export async function getStaticProps({ params: { slug } }) {
+export async function getServerSideProps({ query: { slug } }) {
     const res = await fetch(`${API_URL}/events?slug=${slug}`);
     const event = await res.json();
-
     return {
         props: { event: event[0] },
-        revalidate: 1,
     };
 }
+
+// export async function getStaticPaths() {
+//     const res = await fetch(`${API_URL}/events`);
+//     const events = await res.json();
+//     const paths = events.map((event) => ({
+//         params: { slug: event.slug },
+//     }));
+//     return {
+//         paths,
+//         fallback: true, //false : if notFound redirect to 404page
+//     };
+// }
+// export async function getStaticProps({ params: { slug } }) {
+//     const res = await fetch(`${API_URL}/events?slug=${slug}`);
+//     const event = await res.json();
+
+//     return {
+//         props: { event: event[0] },
+//         revalidate: 1,
+//     };
+// }
