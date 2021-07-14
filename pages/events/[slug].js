@@ -26,6 +26,7 @@ export default function EventPage({ event }) {
                             src={event.image.formats.medium.url}
                             width={960}
                             height={600}
+                            alt={event.name}
                         />
                     </div>
                 )}

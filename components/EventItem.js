@@ -14,6 +14,7 @@ export default function EventItem({ event }) {
                     }
                     width={170}
                     height={100}
+                    alt={event.name}
                 />
             </div>
             <div className={styles.info}>
